@@ -9,11 +9,6 @@ public class SlashDistortionRenderPass : ScriptableRenderPass
         public RendererListHandle rendererListHandle;
     }
 
-    public SlashDistortionRenderPass()
-    {
-
-    }
-
     public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
     {
         using (var builder = renderGraph.AddRasterRenderPass<PassData>("Slash Distortion", out var passData))
@@ -25,9 +20,9 @@ public class SlashDistortionRenderPass : ScriptableRenderPass
             RenderQueueRange renderQueueRange = RenderQueueRange.transparent;
             FilteringSettings filterSettings = new FilteringSettings(renderQueueRange, ~0);
 
-            ShaderTagId shadersToOverride = new ShaderTagId("SlashDistortion");
+            ShaderTagId shaderTagId = new ShaderTagId("SlashDistortion");
 
-            DrawingSettings drawSettings = RenderingUtils.CreateDrawingSettings(shadersToOverride, renderingData, cameraData, lightData, sortFlags);
+            DrawingSettings drawSettings = RenderingUtils.CreateDrawingSettings(shaderTagId, renderingData, cameraData, lightData, sortFlags);
 
             var rendererListParameters = new RendererListParams(renderingData.cullResults, drawSettings, filterSettings);
 

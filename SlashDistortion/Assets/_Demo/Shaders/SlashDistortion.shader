@@ -83,7 +83,7 @@ Shader "Custom/SlashDistortion"
                 float2 distortedUV = screenUV + distortion;
 
                 float aberration = smoothstep(_AberrationThreshold, 1.0, length(distortion)) * _AberrationStrength * mask;
-                float2 aberrationOffset = normalize(distortion) * aberration;
+                float2 aberrationOffset = distortion * aberration;
 
                 float r = SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, distortedUV + aberrationOffset).r;
                 float g = SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, distortedUV).g;
